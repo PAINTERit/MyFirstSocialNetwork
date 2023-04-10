@@ -20,7 +20,7 @@ def update_info(request):
         user.last_name = request.POST.get('last_name')
         user.country = request.POST.get('country')
         user.city = request.POST.get('city')
-        user.date_of_birth = request.POST.get('date_of_birth')
+        user.birth_date = request.POST.get('birth_date')
         user.description = request.POST.get('description')
         user.save()
         return render(request, 'cabinet/account.html')
