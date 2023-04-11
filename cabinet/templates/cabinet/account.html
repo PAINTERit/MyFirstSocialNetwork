@@ -131,7 +131,8 @@
                                             <h5>Друзья</h5>
                                         </div>
                                         <div class="col text-end">
-                                            <a href="{% url 'update_info' %}" class="btn btn-primary">Изменить данные</a>
+                                            <a href="{% url 'update_info' %}" class="btn btn-primary">Изменить
+                                                данные</a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -190,33 +191,14 @@
                                             <a href="{% url 'create_post' %}" class="btn btn-primary">Добавить пост</a>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <p class="font-weight-bold mb-1">My First Post</p>
-                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Sed eget augue auctor, rhoncus nunc ac, ultrices nibh. Donec
-                                                volutpat tortor eu sapien tincidunt dignissim.</p>
+                                    {% for post in user_posts %}
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ post.title }}</h5>
+                                                <p class="card-text">{{ post.content }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <p class="font-weight-bold mb-1">My First Post</p>
-                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Sed eget augue auctor, rhoncus nunc ac, ultrices nibh. Donec
-                                                volutpat tortor eu sapien tincidunt dignissim.</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <p class="font-weight-bold mb-1">My First Post</p>
-                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Sed eget augue auctor, rhoncus nunc ac, ultrices nibh. Donec
-                                                volutpat tortor eu sapien tincidunt dignissim.</p>
-                                        </div>
-                                    </div>
-                                    <hr>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
