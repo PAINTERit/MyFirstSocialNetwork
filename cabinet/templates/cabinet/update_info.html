@@ -10,7 +10,7 @@
 <div class="container-fluid" style="height: 100vh">
     <div class="row" style="height: 100%">
         <!-- Навигационное меню -->
-        <div class="d-flex flex-column flex-shrink-0  bg-light" style="flex-grow: 1; max-width: 20%; margin-top: 0;">
+        <div class="d-flex flex-column flex-shrink-0  bg-light" style="flex-grow: 1; max-width: 300px; margin-top: 0;">
             <ul class="nav nav-pills flex-column mb-auto"
                 style="position: -webkit-sticky; position: sticky; top: 10px;">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'chat' %}" class="nav-link link-dark">
+                    <a href="#" class="nav-link link-dark">
                         Сообщения
                     </a>
                 </li>
@@ -84,15 +84,18 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="mb-3">
                                                 <label for="first_name" class="form-label">Имя</label>
-                                                <input type="text" class="form-control" id="first_name" name="first_name" required/>
+                                                <input type="text" class="form-control" id="first_name"
+                                                       name="first_name" required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="last_name" class="form-label">Фамилия</label>
-                                                <input type="text" class="form-control" id="last_name" name="last_name" required/>
+                                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                                       required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="country" class="form-label">Страна</label>
-                                                <input type="text" class="form-control" id="country" name="country" required/>
+                                                <input type="text" class="form-control" id="country" name="country"
+                                                       required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="city" class="form-label">Город</label>
@@ -100,16 +103,20 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="birth_date" class="form-label">Дата рождения</label>
-                                                <input type="date" class="form-control" id="birth_date" name="birth_date" required/>
+                                                <input type="date" class="form-control" id="birth_date"
+                                                       name="birth_date" required/>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="description" class="form-label">Обо мне</label>
-                                                <div><textarea name="description" cols="109" rows="5"></textarea></div>
+                                                <div><textarea name="description" rows="4"
+                                                               style="width: 100%"></textarea></div>
                                             </div>
                                         </ul>
+                                        <div style="text-align: center">
+                                            <button type="submit" class="btn btn-primary" style="width: 20%">Изменить</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Изменить</button>
                             </form>
                         </div>
                     </div>
