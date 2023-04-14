@@ -36,6 +36,7 @@
                     <ul class="dropdown-menu" aria-labelledby="friendsDropdown">
                         <li><a class="dropdown-item" href="{% url 'friends' %}">Мои друзья</a></li>
                         <li><a class="dropdown-item" href="{% url 'find_friend' %}">Найти друзей</a></li>
+                        <li><a class="dropdown-item" href="{% url 'friend_request' %}">Запросы в друзья</a></li>
                     </ul>
                 </li>
                 <li>
@@ -85,34 +86,20 @@
                     </form>
                     <h1>Возможные друзья</h1>
                     <div class="row row-cols-1 row-cols-md-3 g-4">
+                        {% for friend in friends %}
                         <div class="col">
                             <div class="card">
                                 <img src="https://via.placeholder.com/300x200.png?text=Friend+1" class="card-img-top"
                                      alt="Friend 1">
                                 <div class="card-body">
-                                    <h5 class="card-title">Friend 1</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Phasellus
-                                        nec
-                                        iaculis mauris.</p>
-                                    <a href="#" class="btn btn-primary">View </a>
+                                    <div hidden>{{ friend.id }}</div>
+                                    <h5 class="card-title">{{ friend.first_name }} {{ friend.last_name }}</h5>
+                                    <a href="#" class="btn btn-primary">Посмотреть</a>
+                                    <a href="{% url 'send_friend_request' to_user_id=friend.id %}" class="btn btn-primary">Добавить</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/300x200.png?text=Friend+2" class="card-img-top"
-                                     alt="Friend 2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Friend 2</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Phasellus
-                                        nec
-                                        iaculis mauris.</p>
-                                    <a href="#" class="btn btn-primary">View </a>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
