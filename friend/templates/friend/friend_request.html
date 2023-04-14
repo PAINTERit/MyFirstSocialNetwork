@@ -75,19 +75,34 @@
         <!-- Main content -->
         <div class="col" style="margin: 20px">
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                {% for friend in friends %}
-                    <div class="col">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/300x200.png?text=Friend+1" class="card-img-top"
-                                 alt="Friend 1">
-                            <div class="card-body">
-                                <div hidden>{{ friend.id }}</div>
-                                <h5 class="card-title">{{ friend.first_name }} {{ friend.last_name }}</h5>
-                                <a href="#" class="btn btn-primary">Посмотреть</a>
+                {% if friend_requests %}
+                    {% for request in friend_requests %}
+                        {% for user in users %}
+                            <div class="col">
+                                <div class="card">
+                                    <img src="https://via.placeholder.com/300x200.png?text=Friend+1"
+                                         class="card-img-top"
+                                         alt="Friend 1">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                                        <form action="{% url 'accept_friend_request' %}" method="POST"
+                                              class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-success">Accept</button>
+                                        </form>
+                                        <form action="{% url 'reject_friend_request' %}" method="POST"
+                                              class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <p>Запросов нет!</p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -96,5 +111,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
