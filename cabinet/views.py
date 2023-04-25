@@ -15,7 +15,10 @@ def account(request, user_username):
 @login_required
 def update_info(request):
     if request.method == 'POST':
+        print(request.POST)
+        print(request.FILES)
         user = Person.objects.filter(id=request.user.id).first()
+        user.avatar = request.FILES.get('avatar')
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         user.country = request.POST.get('country')
