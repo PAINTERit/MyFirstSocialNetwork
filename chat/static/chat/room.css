@@ -1,0 +1,36 @@
+.message {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.message p {
+    margin-bottom: 0;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+}
+
+.message.sent p {
+    background-color: lightblue;
+}
+
+.message.received p {
+    background-color: lightblue;
+}
