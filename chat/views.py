@@ -24,15 +24,25 @@ def create_room(request):
         room_id = random.randint(1, 999999)
         user_id = Person.objects.filter(id=request.user.id).first()
         friend_id = Person.objects.filter(id=request.POST.get('friend_id')).first()
+        rooms = list(Room.objects.filter(room_id=room_id).all())
+
+        while True:
+            if room in rooms:
+                room_id = random.randint(1, 999999)
+            break
+
         Room.objects.create(room_id=room_id, user_id=user_id, friend_id=friend_id)
-        return redirect(room, room_id=room_id)
+        Room.objects.create(room_id=room_id, user_id=friend_id, friend_id=user_id)
+        return redirect('room', room_id=room_id)
 
 
 def check_room(request):
     if request.method == 'POST':
         user_id = Person.objects.filter(id=request.user.id).first()
         friend_id = Person.objects.filter(id=request.POST.get('friend_id')).first()
-        room_id = Room.objects.filter(user_id=user_id, friend_id=friend_id).first().room_id
-        if room_id:
-            return redirect(room, room_id=room_id)
-        return create_room(request)
+        room = Room.objects.filter(user_id=user_id, friend_id=friend_id).first()
+        if room is None:
+            return create_room(request)
+        else:
+            room_id = room.room_id
+            return redirect('room', room_id=room_id)
