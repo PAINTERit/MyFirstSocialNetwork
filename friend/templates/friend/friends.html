@@ -52,12 +52,14 @@
                     {% if user.avatar %}
                         <div class="d-flex justify-content-center align-items-center">
                             <!-- Добавленный класс -->
-                            <img src="{{ user.avatar.url }}" alt="Admin" width="32" height="32" class="rounded-circle me-2">
+                            <img src="{{ user.avatar.url }}" alt="Admin" width="32" height="32"
+                                 class="rounded-circle me-2">
                         </div>
                     {% else %}
                         <div class="d-flex justify-content-center align-items-center">
                             <!-- Добавленный класс -->
-                            <img src="/media/default/default_avatar.jpg" alt="Admin" width="32" height="32" class="rounded-circle me-2">
+                            <img src="/media/default/default_avatar.jpg" alt="Admin" width="32" height="32"
+                                 class="rounded-circle me-2">
                         </div>
                     {% endif %}
                     <strong>{{ user.last_name }} {{ user.first_name }}</strong>
@@ -84,27 +86,23 @@
 
         <!-- Main content -->
         <div class="col" style="margin: 20px">
-            <div class="row row-cols-1 row-cols-md-5 g-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% for friend in friends %}
                     <div class="col">
-                        <div class="card" style="text-align: center">
-                            {% if user.avatar %}
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <!-- Добавленный класс -->
-                                    <img src="{{ user.avatar.url }}" alt="Admin" class="rounded-circle"
-                                         width="150">
-                                </div>
-                            {% else %}
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <!-- Добавленный класс -->
-                                    <img src="/media/default/default_avatar.jpg" alt="Admin" class="rounded-circle"
-                                         width="150">
-                                </div>
-                            {% endif %}
+                        <div class="card text-center">
                             <div class="card-body">
+                                <img src="/media/default/default_avatar.jpg" width="300" height="300" alt="Friend 1"
+                                     class="mx-auto">
                                 <div hidden>{{ friend.id }}</div>
                                 <h5 class="card-title">{{ friend.first_name }} {{ friend.last_name }}</h5>
-                                <a href="#" class="btn btn-primary">Посмотреть</a>
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-primary mx-2">Посмотреть</a>
+                                    <form method="post" action="{% url 'check_room' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="friend_id" value="{{ friend.id }}">
+                                        <button class="btn btn-primary mx-2" type="submit">Написать</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
