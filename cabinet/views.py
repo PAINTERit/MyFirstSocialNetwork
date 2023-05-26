@@ -2,13 +2,25 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from cabinet.models import Person
 from post.models import Post
+from friend.models import Friend
 
 
 @login_required
 def account(request, user_username):
-    user = Person.objects.filter(username=user_username).first()
+    user = Person.objects.filter(username=request.user.username).first()
     user_posts = Post.objects.filter(author_id=user.id).values('title', 'content')
-    context = {'user_posts': user_posts}
+    user_friends = Friend.objects.filter(user=user).select_related('friend')
+    friends_info = []
+    for friend in user_friends:
+        friend_info = {
+            'avatar': friend.friend.avatar,
+            'first_name': friend.friend.first_name,
+            'last_name': friend.friend.last_name,
+            'email': friend.friend.email,
+        }
+        friends_info.append(friend_info)
+    context = {'user_posts': user_posts,
+               'user_friends': friends_info}
     return render(request, 'cabinet/account.html', context)
 
 
