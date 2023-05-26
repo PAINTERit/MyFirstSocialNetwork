@@ -14,6 +14,7 @@ def friends(request):
             'id': friend.friend.id,
             'first_name': friend.friend.first_name,
             'last_name': friend.friend.last_name,
+            'avatar': friend.friend.avatar,
         }
         friend_list.append(friend_info)
     context = {'friends': friend_list}
@@ -28,7 +29,7 @@ def find_friend(request):
     friend_list = []
     for friend in friends:
         if friend.username != request.user.username and friend.username != 'admin' and friend.id not in to_users:
-            friend_info = Person.objects.filter(username=friend).values('first_name', 'last_name', 'id').first()
+            friend_info = Person.objects.filter(username=friend).values('first_name', 'last_name', 'id', 'avatar').first()
             friend_list.append(friend_info)
     context = {'friends': friend_list}
     return render(request, 'friend/find_friend.html', context)

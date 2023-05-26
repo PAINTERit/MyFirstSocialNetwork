@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friendlist</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 <div class="container-fluid" style="height: 100vh">
@@ -100,16 +100,21 @@
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         {% for friend in friends %}
                             <div class="col">
-                                <div class="card">
-                                    <img src="https://via.placeholder.com/300x200.png?text=Friend+1"
-                                         class="card-img-top"
-                                         alt="Friend 1">
+                                <div class="card text-center">
                                     <div class="card-body">
-                                        <div hidden>{{ friend.id }}</div>
-                                        <h5 class="card-title">{{ friend.first_name }} {{ friend.last_name }}</h5>
-                                        <a href="#" class="btn btn-primary">Посмотреть</a>
-                                        <a href="{% url 'send_friend_request' to_user_id=friend.id %}"
-                                           class="btn btn-primary">Добавить</a>
+                                        {% if friend.avatar %}
+                                            <img src="{{ friend.avatar.url }}" alt="Admin" class="rounded-circle"
+                                                 width="200" height="200">
+                                        {% else %}
+                                            <img src="/media/default/default_avatar.jpg" alt="Admin"
+                                                 class="rounded-circle"
+                                                 width="200" height="200">
+                                        {% endif %}
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#" class="btn btn-primary mx-2">Посмотреть</a>
+                                            <a href="{% url 'send_friend_request' to_user_id=friend.id %}"
+                                               class="btn btn-primary">Добавить</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +126,9 @@
     </div>
 </div>
 <!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 
