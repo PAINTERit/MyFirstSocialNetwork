@@ -5,12 +5,25 @@ from django.utils.safestring import mark_safe
 from django.shortcuts import render, redirect
 from chat.models import Room
 from cabinet.models import Person
+from friend.models import Friend
 import random
 
 
 @login_required
 def all_chats(request):
-    return render(request, 'chat/all_chats.html')
+    user = Person.objects.filter(username=request.user.username).first()
+    user_friends = Friend.objects.filter(user=user).select_related('friend')
+    friend_list = []
+    for friend in user_friends:
+        friend_info = {
+            'id': friend.friend.id,
+            'first_name': friend.friend.first_name,
+            'last_name': friend.friend.last_name,
+            'avatar': friend.friend.avatar,
+        }
+        friend_list.append(friend_info)
+    context = {'friends': friend_list}
+    return render(request, 'chat/all_chats.html', context)
 
 
 @login_required
