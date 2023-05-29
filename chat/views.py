@@ -28,8 +28,11 @@ def all_chats(request):
 
 @login_required
 def room(request, room_id):
+    friend = Room.objects.get(room_id=room_id, user_id=request.user.id).friend_id
+    friend_avatar = Person.objects.get(username=friend).avatar
     return render(request, 'chat/room.html', {'room_name_json': mark_safe(json.dumps(room_id)),
-                                              'username': mark_safe(json.dumps(request.user.username))})
+                                              'username': mark_safe(json.dumps(request.user.username)),
+                                              'avatar': friend_avatar})
 
 
 def create_room(request):
