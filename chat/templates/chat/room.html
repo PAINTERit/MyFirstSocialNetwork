@@ -118,11 +118,6 @@
 <script>
     var roomName = {{ room_name_json }};
     var username = {{ username }};
-    var friendAvatars = {
-        {% for friend in friend_avatars %}
-            '{{ friend.username }}': '{{ friend.avatar.url }}',
-        {% endfor %}
-    };
 
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
@@ -183,7 +178,7 @@
             msgListTag.appendChild(imgTag);
         } else {
             msgListTag.className = 'message received';
-            imgTag.src = friendAvatars[author];
+            imgTag.src = '{{ avatar.url }}';
             msgListTag.appendChild(imgTag);
             msgListTag.appendChild(pTag);
         }
